@@ -109,7 +109,7 @@ function get_container {
 function create_container_profiles {
 
     lxc profile copy default validator
-    cat /tmp/profile | lxc profile edit validator
+    cat ./profile | lxc profile edit validator
 
 }
 
