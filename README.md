@@ -16,8 +16,9 @@ sudo usermod -a -G lxd $USER
 exit
 ```
 
-Log back in then Get the script and execute it
+Log back in to initialize lxd then Get the script and execute it
 ```
+lxd init --auto
 git clone https://github.com/crypto-guys/near-guildnet-validator-inabox.git
 cd near-guildnet-validator-inabox
 chmod +x ./installer
