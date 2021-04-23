@@ -13,9 +13,10 @@ Install lxd
 sudo apt install snapd
 sudo snap install lxd
 sudo usermod -a -G lxd $USER
+exit
 ```
 
-Get the script and execute it
+Log back in then Get the script and execute it
 ```
 git clone https://github.com/crypto-guys/near-guildnet-validator-inabox.git
 cd near-guildnet-validator-inabox
