@@ -3,7 +3,7 @@ Create a NEAR guildnet validator automatically
 
 # Requirements
 
-- Ubuntu Server bionic or newer with lxd installed 
+- Ubuntu Server bionic or newer with snapd and lxd installed
 - A Validator PoolId [instructions](https://github.com/near-guildnet/docs/blob/master/Staking_Pool_Cheatsheet.md#deploy-a-staking-pool-using-the-staking-pool-factory)
 
 # Instructions
@@ -18,7 +18,6 @@ exit
 
 Log back in to initialize lxd then Get the script and execute it
 ```
-lxd init --auto
 git clone https://github.com/crypto-guys/near-guildnet-validator-inabox.git
 cd near-guildnet-validator-inabox
 chmod +x ./installer
