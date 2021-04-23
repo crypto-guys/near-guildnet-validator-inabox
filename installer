@@ -215,7 +215,7 @@ function update_staking_key {
     yourValidatorId=$(lxc exec ${validator_name} -- sh -c "cat /home/neard/.near/guildnet/validator_key.json | grep \"account_id\"")
     yourPublicKey=$(lxc exec ${validator_name} -- sh -c "cat /home/neard/.near/guildnet/validator_key.json | grep \"public_key\"")
     echo "* Please enter the following command from your near-cli machine"
-    echo '         near call '$yourValidatorId' update_staking_key '{"stake_public_key": "'$yourPublicKey'"}' --accountId <enter your accountId here>'
+    echo '         near call '$yourValidatorId' update_staking_key '{"stake_public_key": "'$yourPublicKey'"}' --accountId '$accountId''
 
 }
 
