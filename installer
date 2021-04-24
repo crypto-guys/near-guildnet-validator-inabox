@@ -2,7 +2,7 @@
 
 set -eu
 # Script settings 
-RELEASE=focal # focal or bionic
+RELEASE=focal # groovy focal or bionic
 NEAR_VERSION="1.18.1-rc.2"
 NEAR_REPO="https://github.com/near-guildnet/nearcore.git"
 NODE_EXPORTER_REPO="https://github.com/prometheus/node_exporter.git"
@@ -225,9 +225,9 @@ then
     exit
 fi
 
+ 
 function create_compiler_container {
 
-    create_container_profiles
     update_via_apt
     get_container
 
@@ -241,7 +241,7 @@ function compile_neard {
 }
 function create_validator {
 
-    #create_container_profiles
+    create_container_profiles
     create_validator_container
     put_binary    
     enable_neard_service
