@@ -22,7 +22,7 @@ read accountId
 
 vm_name=compiler
 validator_name=validator
-
+manager_name=manager
 
 echo "* Starting the NEARCORE compile process"
 
