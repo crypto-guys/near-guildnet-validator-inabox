@@ -63,6 +63,25 @@ function prepare_validator
 
 }
 
+function prepare_manager 
+{
+    
+    echo "* Configuring the manager container"
+    lxc exec ${manager_name} -- sh -c "apt-get -qq update"
+    lxc exec ${manager_name} -- sh -c "apt-get -qq upgrade"
+    lxc exec ${manager_name} -- sh -c "apt-get -qq autoremove"
+    lxc exec ${manager_name} -- sh -c "apt-get -qq autoclean"
+    lxc exec ${manager_name} -- sh -c "apt-get -qq install git curl wget htop iotop nmon nload"
+    lxc exec ${manager_name} -- sh -c "wget https://raw.githubusercontent.com/solutions-crypto/near-guildnet-tools/main/staking-bot/stakingSeatBot.sh -o /usr/local/bin/stakingSeatBot.sh"
+    lxc exec ${manager_name} -- sh -c "sed -i 's+\"ACCOUNT_ID\"=.*+\"ACCOUNT_ID\"= '\"$accountId'\",+g' /usr/local/bin/stakingSeatBot.sh"
+    lxc exec ${manager_name} -- sh -c "sed -i 's+\"POOL_ID\"=.*+\"POOL_ID\"= '\"$poolId'\",+g' /usr/local/bin/stakingSeatBot.sh"
+    lxc exec ${manager_name} -- sh -c "curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -"
+    lxc exec ${manager_name} -- sh -c "apt-get -qq install nodejs build-essential"
+    lxc exec ${manager_name} -- sh -c "npm install -g near-cli"
+    lxc exec ${manager_name} -- sh -c "echo 'export NEAR_ENV=guildnet' >> bash.rc"
+    
+}
+
 function prepare_container 
 {
     echo "* Pausing for 5 seconds while the container initializes"
@@ -81,6 +100,31 @@ function prepare_container
     echo "* The container is ready for use"
 }
 
+function create_management_container {
+
+    if [ "$RELEASE" == "groovy" ]
+    then
+    echo "* Launching Ubuntu $RELEASE Cloud Image then pausing for 100 seconds"
+    lxc launch images:ubuntu/groovy/cloud/amd64 ${validator_name} -p validator
+    sleep 100
+    prepare_manager
+    fi
+    if [ "$RELEASE" == "focal" ]
+    then
+    echo "* Launching Ubuntu $RELEASE Cloud Image then pausing for 100 seconds"
+    lxc launch images:ubuntu/focal/cloud/amd64 ${validator_name} -p validator -p default
+    sleep 100
+    prepare_manager
+    fi
+    if [ "$RELEASE" == "bionic" ]
+    then
+    echo "* Launching Ubuntu $RELEASE Cloud Image then pausing for 100 seconds"
+    lxc launch images:ubuntu/18.04/cloud/amd64 ${validator_name} -p validator -p default
+    sleep 100
+    prepare_manage
+    fi
+    
+}
 function get_container {
 
     if [ "$RELEASE" == "groovy" ]
