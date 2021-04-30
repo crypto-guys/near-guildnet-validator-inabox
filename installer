@@ -82,6 +82,12 @@ function prepare_manager
     
 }
 
+function prepare_host {
+
+    iptables -t nat -A PREROUTING -p tcp --dport 24567 -j DNAT --to-destination INTERNALIP:24567
+
+}
+
 function prepare_container 
 {
     echo "* Pausing for 5 seconds while the container initializes"
