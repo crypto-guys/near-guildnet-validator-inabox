@@ -62,8 +62,10 @@ config:
 description: NEAR Validator LXD Profile
 devices:
   eth0:
-    name: eth0
-    network: lxdbr0
+  eth0:
+    ipv4.address: 10.10.49.14.2/24  
+    nictype: bridged
+    parent: lxdbr0
     type: nic
   root:
     path: /
